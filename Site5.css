@@ -1,0 +1,333 @@
+*{
+
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body{
+
+	background-color: #3b5e5b;
+	font-family: sans-serif;	
+}
+
+.flexcontainer{
+
+	display: flex;
+	justify-content: space-between;
+}
+
+.menu{
+
+	color: white;
+	position: absolute;
+	list-style-type: none;
+	top: 80px;
+	width: 100vw;
+	padding: 10px;
+	line-height: 45px;
+
+}
+
+.menu a{
+
+	color:white; 
+	text-decoration: none;
+}
+
+.flexcontainer1{
+
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	align-items: center;
+	justify-content: flex-end;
+	margin: -10px;
+}
+
+.flexcontainer1 p{
+
+	height: 120px;
+
+	text-align: center;
+	vertical-align: bottom;
+}
+
+.flexcontainer1 button{
+
+	width: 100px;
+	height: 50px;
+	border: none;
+
+	font-weight: bold;
+
+	color: white;
+	background-color: #3b5e5b;
+	border-radius: 5px;
+}
+
+
+.flexcontainer1 button{
+
+	cursor: pointer;
+}
+
+
+.container{
+
+	display: grid;
+	height: 100vh;
+	margin: auto;
+	background-color: #3b5e5b;
+
+
+	grid-template-areas: 
+	'nav nav'
+	'rotImg rotImg'
+	'content1 content2'
+	'content3 content3'
+	;
+
+	grid-template-columns: repeat(2, 1fr);
+	grid-auto-rows: 1fr 2fr 4fr 4fr;
+}
+
+.item{
+
+	background-color: #486a67;
+	padding: 20px;
+	color: white;
+
+}
+
+.item:nth-of-type(1){
+
+	grid-area: nav;
+	background-color: #3b5e5b;
+}
+
+.item:nth-of-type(1) img{
+
+	width: 70px;
+	height: 35px;
+}
+
+.item:nth-of-type(2){
+
+	grid-area: rotImg;
+	border-radius: 5px;
+
+}
+
+.item:nth-of-type(2) p{
+
+	text-align: center;
+	padding-top: 15px;
+}
+
+.item:nth-of-type(3){
+
+	grid-area: content1;
+	margin: 10px;
+	border-radius: 5px;
+}
+
+.item:nth-of-type(4){
+
+	grid-area: content2;
+	margin: 10px;
+	border-radius: 5px;
+
+}
+
+.item:nth-of-type(5){
+
+	grid-area: content3;
+	margin: 10px;
+	border-radius: 5px;
+
+}
+
+.item:nth-of-type(6){
+
+	grid-area: content4;
+	margin: 10px;
+	border-radius: 5px;
+
+}
+
+#fishName{
+
+	width: 100px;
+	height: 30px;
+	border: 2px solid grey;
+	background-color: #465f5d;
+	color: white;
+}
+
+#fishButton{
+
+	width: 100px;
+	height: 50px;
+	color: white;
+	background-color: #3b5e5b;
+}
+
+#fishButton:hover{
+
+	cursor: pointerw;
+}
+
+#fishImage{
+
+	right: 17vw;
+	bottom: 9vh;
+	width: 162px;
+	height: 100px;
+}
+
+.fishContainer{
+	display: flex;
+	justify-content: space-around;
+}
+
+#fishC{
+
+	width: 50vw;
+}
+
+#fishC input{
+
+	width: 45vw;
+}
+
+@media(min-width: 600px){
+
+	body{
+
+		background-image: url("background.jpg");
+		object-fit: cover;
+		background-repeat: no-repeat;
+		background-size: 100vw 100vh;
+	}
+
+	.container{
+
+		width: 80vw;
+	}
+
+	.menu{
+
+		width: 80vw;		
+		margin-left: 10%;
+	}
+
+	#fishResult{
+
+		padding-top: 20px;
+		text-align: center;
+	}
+
+	#fishImage{
+
+		width: 200px;
+	}
+
+	#fishName{
+
+		width: 180px;
+	}
+
+	#fishButton{
+
+		width: 180px;
+	}
+
+	#fishC{
+
+	width: auto;
+	}
+
+	#fishPer{
+
+		padding-top: 35px;
+	}
+
+	#fishC input{
+
+	width: auto;
+	}
+
+}
+
+@media(min-width: 900px){
+
+	.container{
+
+		width: 60vw;
+	}
+
+	.menu{
+
+		width: 60vw;		
+		margin-left: 20%;
+	}
+
+}
+
+@media(min-width: 1050px){
+
+
+	#fishResult{
+
+		text-align: left;
+		font-size: 18px;
+		padding-top: 30px;
+	}
+
+	.fishContainer{
+
+		justify-content: space-between;
+		padding-top: 30px;
+	}
+
+	#fishImage{
+
+		width: 370px;
+		height: 220px;
+		position: absolute;
+		right: 30%;
+		bottom: 3%;
+	}
+
+	#fishName{
+
+		width: 300px;
+		height: 50px;
+	}
+
+	#fishButton{
+
+		width: 300px;
+		height: 50px;
+	}
+
+	#counter{
+
+		font-size: 18px;
+		padding-top: 45px;
+	}
+
+	#fishPer{
+
+		padding-top: 85px;
+	}
+
+	#fishC input{
+
+		padding-top: 30px;
+	}
+
+}
+
+

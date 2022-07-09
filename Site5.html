@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="Site5.css">
+	<title></title>
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="item"> 
+			<div class="flexcontainer">
+				<a href="#"><img src="logo.png"></a>
+				<a href="#" onclick="dropdown()">
+					<p style="transform: rotate(-90deg); color: black; font-size: 24px; font-weight: bold; width: 30px; height: 30px;"> ||| </p> 
+				</a>
+			</div> 
+		</div>
+
+		<div class="item"> <div class="weatherWidget" ></div>
+
+			<script src="weather.js"></script>
+
+			<p>Perfect day for fishing amirite</p>
+	</div>
+
+		<div class="item" style=""> 
+			<div class="flexcontainer1" style="">
+				<button onclick="chuck()" >Click me</button>
+				<p id="output" style=""></p>
+				<h4 id="counter" style="">You have pressed this button 0 times.</h4>
+			</div>
+		</div>
+
+		<div class="item" id="fishC">
+
+			<h4>Are you unsure what you saw was a fish or not? Upload your image here and find out!</h4>
+			<br><br>
+  			<label for="fileUpload">Choose file:</label>
+  			<input type="file" id="fileUpload" name="fileUpload">
+  			<br><br>
+  			<button id="jsonConvert" onclick="fishChecker()">Click me to upload file</button>
+  			<br><br>
+  			<p id="fishPer"></p>
+
+		</div>
+
+		<div class="item"> 
+			<h4>Have you ever wondered how a fish looks like?</h4>
+			<br>
+			<p style="text-align: justify;">
+			Well, wonder no more! Here you can search any type of fish you like, and a image of their likeness shall appear. (button is rusty so press it twice pls)
+			</p>
+			<br>
+
+		<div class="fishContainer">
+			<div class="fishItem">
+				<input type="text" id="fishName" placeholder="Fish name here">
+				<br><br>
+				<button type="button" id="fishButton" onclick="fishFind()">Submit</button>
+				<br><br>
+			</div>
+			<div class="fishItem">
+				<img src="image.png" id="fishImage">
+			</div>
+		</div>
+
+			<p id="fishResult"></p>
+		</div>
+
+	</div>
+
+	<ul class="menu">
+		
+		<li> </li>
+		<li> </li>
+		<li> </li>
+		<li> </li>
+		<li> </li>
+		<li> </li>
+
+	</ul>
+
+	<script type="text/javascript">
+
+	let countchuck = 1;
+	let hellocounter = 0;
+	let menucounter = 0;
+	let fishSource = '';
+
+	function hello() {
+
+		if(hellocounter % 2 == 0){
+			document.getElementById("demo").innerHTML = "Hello World";
+	  		document.getElementById("demobutton").style.background = 'red'
+
+	  		hellocounter = 1;
+		} else{
+
+	  		document.getElementById("demo").innerHTML = "";
+	  		document.getElementById("demobutton").style.background = ''
+
+	  		hellocounter = 0;
+		}
+  	}
+
+  	function dropdown(){
+
+  		const ul = document.querySelector('.menu');
+
+		if(menucounter % 2 == 0){
+			ul.children[0].innerHTML = '<a href="#"> Home </a>';
+			ul.children[1].innerHTML = '<a href="#"> Rankings </a>';
+			ul.children[2].innerHTML = '<a href = "#"> Infographics </a>'
+			ul.children[3].innerHTML = '<a href="#"> Replays </a>';
+			ul.children[4].innerHTML = '<a href="#"> Other Fish-Related Stuff </a>';
+
+	  		ul.style.background = '#3b5e5b'
+
+	  		menucounter = 1;
+		} else{
+
+	  		ul.children[0].textContent = '';
+			ul.children[1].textContent = '';
+			ul.children[2].textContent = '';
+			ul.children[3].textContent = '';
+			ul.children[4].textContent = '';
+
+	  		ul.style.background = ''
+
+	  		menucounter = 0;
+		}
+  	}
+
+  	function chuck(){
+
+  	const options = {
+    	method: 'GET',
+    	headers: {
+    	accept: 'application/json',
+    	'X-RapidAPI-Key': 'c64b4506cdmsh8ba9f12f183177ap1654b5jsna23f3b319af3',
+    	'X-RapidAPI-Host': 'matchilling-chuck-norris-jokes-v1.p.rapidapi.com'
+    	}
+  	};
+
+     fetch('https://matchilling-chuck-norris-jokes-v1.p.rapidapi.com/jokes/random', options)
+    .then(response => response.json())
+    .then(response => {
+      document.getElementById('output').textContent = response.value;
+    })
+    .catch(err => console.error(err));
+
+	    document.getElementById('counter').textContent = 'You have pressed this button ' + countchuck + ' times.';
+  		countchuck++;
+  	}
+
+  	function fishFind(){
+
+  		var fish = document.getElementById("fishName").value
+  		
+  		const options = {
+		method: 'GET',
+		headers: {
+			'X-User-Agent': 'desktop',
+			'X-Proxy-Location': 'EU',
+			'X-RapidAPI-Key': 'c64b4506cdmsh8ba9f12f183177ap1654b5jsna23f3b319af3',
+			'X-RapidAPI-Host': 'google-search3.p.rapidapi.com'
+			}
+		};
+
+		fetch('https://google-search3.p.rapidapi.com/api/v1/image/q=' + fish , options)
+		.then(response => response.json())
+		.then(response => fishSource = response.image_results[0].image.src)
+		.catch(err => console.error(err));
+
+		fishImage.src = fishSource;
+
+		document.getElementById('fishResult').textContent = 'There you have it. This is what a \"' + fish + '\" looks like.'
+  	};
+
+  	let base64 = '';
+  	let results = '';
+  	let percentage = '';
+
+  const toBase64 = file => new Promise((resolve, reject) => {
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+
+  function fishChecker() {
+
+    const uploadedFile = document.querySelector('#fileUpload').files[0];
+    toBase64(uploadedFile)
+    .then(res => {
+      base64 = res;
+    })
+    .catch(err => {
+      console.log(err);
+    })
+
+    let base645 = base64.substring(23 , (base64.length));
+
+    let url = 'https://cors-anywhere.herokuapp.com/https://www.de-vis-software.ro/fishcrowddet.aspx';
+let username = 'erin orana';
+let password = 'Pashkupic.jpg1';
+var data = {
+            "base64_Photo_String": base645,
+            "photo_url":"NO"
+           };
+
+var x = new XMLHttpRequest();
+    x.open('POST', url);
+    x.setRequestHeader('Authorization', 'Basic ' + window.btoa(username + ":" + password));
+    x.setRequestHeader('Content-Type', 'application/json');
+    x.setRequestHeader('Accept', 'application/json');
+    x.onload = x.onerror = function() {
+      if (x.status==200 && x.statusText=='OK')
+         results = x.responseText;
+
+      else
+         console.log("Error");
+    };
+    x.send(JSON.stringify(data));
+
+  //  percentage = results[70] + results [71];
+    percentage = String(results);
+
+    document.getElementById('fishPer').textContent = 'Hmmm...';
+
+    if (percentage.includes('TRIAL')) {
+
+      document.getElementById('fishPer').textContent = 'Fish machine broke :(';
+    }
+
+    if (percentage.includes('Fish Crowd')) {
+      document.getElementById('fishPer').textContent = 'This thing is ' + results[70] + results[71] + '% fish!';
+    }
+
+    if (percentage.includes('Negative')) {
+      document.getElementById('fishPer').textContent = 'This thing is ' + results[70] + results[71] + '% NOT fish!';
+    }
+
+      console.log(percentage);      
+  };
+
+	</script>
+</body>
+
+</html>
